@@ -1,0 +1,41 @@
+.server-item {
+  font-family: Minecraft;
+  height: 70px;
+  padding-bottom: 6px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  background: #252525;
+  border-bottom: 1px solid rgba(50,50,50,0.7);
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.server-item:hover {
+  background: #2f2f2f;
+}
+
+.server-info {
+  float: left;
+  margin-left: 15px;
+}
+
+.server-info span {
+  margin-left: 5px;
+  margin-right: 10px;
+}
+.server-favicon {
+  min-width: 64px;
+  min-height: 64px;
+  display: inline-block;
+  float: left;
+}
+
+.motd {
+  margin-left: 5px;
+}

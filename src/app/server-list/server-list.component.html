@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <ng-template appModal></ng-template>
+    <nav class="navbar navbar-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <button class="btn btn-primary" href="#">Add Server</button>
+        </li>
+      </ul>
+    </nav>
+    <div class="row">
+      <div class="server-list">
+        <app-server-list-item (onClickServer)="LogIn($event)" [server]="{host: 'mc.ecocitycraft.com', port: 25565, name: 'EcoCityCraft', version: '1.15.2'}"></app-server-list-item>
+        <app-server-list-item (onClickServer)="LogIn($event)" [server]="{host: 'hub.mcs.gg', port: 25565, name: 'Minesuperior'}"></app-server-list-item>
+        <app-server-list-item (onClickServer)="LogIn($event)" [server]="{host: 'play.primomc.net', port: 25565, name: 'PrimoMC', version: '1.15.2'}"></app-server-list-item>
+        <app-server-list-item (onClickServer)="LogIn($event)" [server]="{host: 'play.lemoncloud.net', port: 25565, name: 'LemonCloud'}"></app-server-list-item>
+        <app-server-list-item (onClickServer)="LogIn($event)" [server]="{host: 'mc.mineheroes.org', port: 25565, name: 'MineHeroes'}"></app-server-list-item>
+      </div>
+
+    </div>
+
+</div>
+
+

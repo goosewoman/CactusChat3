@@ -1,18 +1,22 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {PageNotFoundComponent} from './shared/components';
-import {MainScreenComponent} from "./main-screen/main-screen.component";
-
+import {ServerListComponent} from "./server-list/server-list.component";
+import {ChatScreenComponent} from "./chat-screen/chat-screen.component";
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'main-screen',
+    redirectTo: 'server-list',
     pathMatch: 'full'
   },
   {
-    path: 'main-screen',
-    component: MainScreenComponent
+    path: 'server-list',
+    component: ServerListComponent
+  },
+  {
+    path: 'chat-screen',
+    component: ChatScreenComponent
   },
   {
     path: '**',

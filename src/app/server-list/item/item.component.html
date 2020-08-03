@@ -1,0 +1,12 @@
+<div class="server-item" (click)="onClick()">
+  <img [src]="serverIcon" class="server-favicon" alt=""/>
+  <div class="server-info">
+    <div class="topbar">
+      <span>{{server.name}}</span>
+      <span *ngIf="server.version">version: {{server.version}}</span>
+      <span *ngIf="latency" [textContent]="'ping: ' + latency + 'ms'"></span>
+      <span *ngIf="players !== null && players !== undefined">players: <span [textContent]="players"></span> / <span [textContent]="maxPlayers"></span></span>
+    </div>
+    <div class="motd" [innerHTML]="motd"></div>
+  </div>
+</div>

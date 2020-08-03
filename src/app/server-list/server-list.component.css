@@ -1,0 +1,13 @@
+ul {
+  width: 100px;
+  margin: auto;
+  text-align: center;
+}
+
+.server-list {
+  margin: 0 auto;
+}
+
+.modal {
+  display: block;
+}

@@ -1,0 +1,39 @@
+.chatMessage {
+  font-family: Minecraft;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  background: #252525;
+  border-bottom: 1px solid rgba(50,50,50,0.7);
+}
+.textarea {
+  /*height: calc(100% - 50px);*/
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 50px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  word-wrap: break-spaces;
+  padding: 5px;
+}
+
+.chatinput {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: calc(100% - 50px);
+}
+.playerlist {
+  display: block;
+  width: 300px;
+  background: darkgray;
+  height: 500px;
+  overflow-y: scroll;
+  position: fixed;
+  top: 0;
+  right: 0
+}

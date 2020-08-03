@@ -92,5 +92,11 @@
   },
   "engines": {
     "node": ">=10.13.0"
+  },
+  "dependencies": {
+    "mcmotdparser": "1.1.1",
+    "minecraft-protocol": "^1.15.0",
+    "mineflayer": "^2.25.0",
+    "prismarine-chat": "^1.0.2"
   }
 }

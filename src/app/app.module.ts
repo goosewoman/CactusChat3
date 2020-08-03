@@ -14,11 +14,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { HomeModule } from './home/home.module';
-import { DetailModule } from './detail/detail.module';
-
 import { AppComponent } from './app.component';
-import { MainScreenComponent } from './main-screen/main-screen.component';
+import { ServerListComponent } from './server-list/server-list.component';
+import { ChatScreenComponent } from './chat-screen/chat-screen.component';
+import { ItemComponent } from './server-list/item/item.component';
+import { LoginModalComponent } from './modal/login-modal/login-modal.component';
+import { ModalDirective } from './modal.directive';
+import { AddServerScreenComponent } from './add-server-screen/add-server-screen.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -26,15 +28,13 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-  declarations: [AppComponent, MainScreenComponent],
+  declarations: [AppComponent, ServerListComponent, ChatScreenComponent, ItemComponent, LoginModalComponent, ModalDirective, AddServerScreenComponent],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     CoreModule,
     SharedModule,
-    HomeModule,
-    DetailModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
