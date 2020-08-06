@@ -10,7 +10,7 @@ describe('ServerListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ServerListComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

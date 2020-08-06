@@ -10,7 +10,7 @@ describe('LoginModalComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ AddServerModalComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

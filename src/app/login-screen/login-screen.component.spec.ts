@@ -10,7 +10,7 @@ describe('LoginScreenComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ LoginScreenComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

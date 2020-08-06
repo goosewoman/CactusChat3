@@ -10,7 +10,7 @@ describe('AddServerScreenComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ AddServerScreenComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -3,7 +3,6 @@ import {remote} from "electron";
 import * as ElectronStore from "electron-store";
 import {BotContainerService} from "../bot-container.service";
 import {Router} from "@angular/router";
-import {compareNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 
 @Component({
   selector: 'app-login-screen',
@@ -19,7 +18,6 @@ export class LoginScreenComponent implements OnInit {
   hasError = false;
   errorMessage: string;
   private submitting = false;
-  private firstSubmit = true;
   private https: any;
 
   constructor(private changeDetector: ChangeDetectorRef, private botContainerService: BotContainerService, private router: Router, private ngZone: NgZone) {
