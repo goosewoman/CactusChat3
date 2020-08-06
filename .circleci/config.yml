@@ -1,0 +1,34 @@
+version: 2.1
+orbs:
+  node: circleci/node@3.0.0
+jobs:
+  build_windows:
+    docker:
+      - image: electronuserland/builder:wine
+    steps:
+      - checkout
+      - run: npm install && npm run electron:build
+      - store_artifacts:
+          path: /root/project/build
+  build_mac:
+  macos:
+      xcode: "10.0.0"
+    steps:
+      - checkout
+      - run: npm install && npm run electron:build
+  build_linux:
+    docker:
+      - image: electronuserland/builder:wine
+    steps:
+      - checkout
+      - run: npm install && npm run electron:build
+      - store_artifacts:
+          path: /root/project/build
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build_windows
+      - build_mac
+      - build_linux
