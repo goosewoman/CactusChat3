@@ -1,5 +1,5 @@
 {
-  "productName": "angular-electron",
+  "productName": "CactusChat3",
   "directories": {
     "output": "release/"
   },
@@ -22,7 +22,7 @@
   "win": {
     "icon": "dist/assets/icons",
     "target": [
-      "portable"
+      "nsis"
     ]
   },
   "mac": {

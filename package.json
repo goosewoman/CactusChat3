@@ -1,11 +1,11 @@
 {
-  "name": "angular-electron",
-  "version": "7.2.1",
-  "description": "Angular 9 with Electron (Typescript + SASS + Hot Reload)",
-  "homepage": "https://github.com/maximegris/angular-electron",
+  "name": "cactus-chat-3",
+  "version": "1.0.0",
+  "description": "Minecraft Java Edition Chat client",
+  "homepage": "",
   "author": {
-    "name": "Maxime GRIS",
-    "email": "maxime.gris@gmail.com"
+    "name": "kukelekuuk",
+    "email": "me@kukelekuuk.com"
   },
   "keywords": [
     "angular",
@@ -94,9 +94,13 @@
     "node": ">=10.13.0"
   },
   "dependencies": {
+    "axios": "0.19.2",
+    "electron-store": "^6.0.0",
     "mcmotdparser": "1.1.1",
     "minecraft-protocol": "^1.15.0",
     "mineflayer": "^2.25.0",
-    "prismarine-chat": "^1.0.2"
+    "mojang": "2.2.2",
+    "prismarine-chat": "^1.0.2",
+    "yggdrasil": "1.3.0"
   }
 }

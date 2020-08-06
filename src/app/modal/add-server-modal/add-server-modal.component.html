@@ -1,22 +1,28 @@
-
 <div class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Log in to {{server.name}}</h5>
+        <h5 *ngIf="!server" class="modal-title">Add new Server</h5>
+        <h5 *ngIf="server" class="modal-title">Edit/Join {{server.name}}</h5>
         <button type="button" class="close" data-dismiss="modal" (click)="OnClose()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="OnSubmit()">
-          <input type="email" class="form-control" #emailInput aria-describedby="loginHelp" placeholder="Email">
-          <input type="password" class="form-control" #passwordInput aria-describedby="loginHelp" placeholder="Password">
-          <small id="loginHelp" class="form-text text-muted">Login info isn't sent anywhere but Mojang's servers</small>
+        <form (keyup.enter)="OnSubmit()">
+          <input type="text" class="form-control" #nameInput placeholder="name" [value]="server ? server.name : ''">
+          <input type="text" class="form-control" #hostInput placeholder="host" [value]="server ? server.host : ''">
+          <input type="number" class="form-control" #portInput placeholder="port" [value]="server ? server.port : '25565'">
+          <label for="versionSelect">Select Version:</label>
+          <select class="form-control" id="versionSelect" #versionSelect>
+            <option *ngFor="let version of versions.reverse()" [value]="version" [selected]="server ? server.version == version : false">{{version}}</option>
+          </select>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="OnSubmit()">Log In</button>
+        <button *ngIf="server" type="button" class="btn btn-primary" (click)="OnSubmit()">Join Server</button>
+        <button *ngIf="server" type="button" class="btn btn-primary" (click)="OnDelete()">Delete Server</button>
+        <button *ngIf="!server" type="button" class="btn btn-primary" (click)="OnSubmit()">Add Server</button>
         <button type="button" class="btn btn-secondary" (click)="OnClose()" data-dismiss="modal">Close</button>
       </div>
     </div>

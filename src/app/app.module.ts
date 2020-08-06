@@ -18,9 +18,10 @@ import { AppComponent } from './app.component';
 import { ServerListComponent } from './server-list/server-list.component';
 import { ChatScreenComponent } from './chat-screen/chat-screen.component';
 import { ItemComponent } from './server-list/item/item.component';
-import { LoginModalComponent } from './modal/login-modal/login-modal.component';
 import { ModalDirective } from './modal.directive';
 import { AddServerScreenComponent } from './add-server-screen/add-server-screen.component';
+import { LoginScreenComponent } from './login-screen/login-screen.component';
+import {AddServerModalComponent} from "./modal/add-server-modal/add-server-modal.component";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -28,7 +29,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-  declarations: [AppComponent, ServerListComponent, ChatScreenComponent, ItemComponent, LoginModalComponent, ModalDirective, AddServerScreenComponent],
+  declarations: [AppComponent, ServerListComponent, ChatScreenComponent, ItemComponent, AddServerModalComponent, ModalDirective, AddServerScreenComponent, LoginScreenComponent],
   imports: [
     BrowserModule,
     FormsModule,

@@ -14,12 +14,13 @@ export class ItemComponent implements OnInit {
   serverIcon = "";
   players: number;
   maxPlayers: number;
-  motd : string;
+  motd: string;
   private mc: any;
   latency: any;
   private ChatMessage: any;
   private motdparser: any;
   version: string;
+  @Input() index: number;
 
   constructor(private electron: ElectronService, private changeDetector: ChangeDetectorRef) {
     this.mc = electron.remote.require("minecraft-protocol");
@@ -34,11 +35,16 @@ export class ItemComponent implements OnInit {
 
   private StartPing() {
     console.log("startping");
+    console.log(this.server)
     this.mc.ping({
       host: this.server.host,
       port: this.server.port,
       majorVersion: this.server.version
     }, (error, result) => {
+      if (result === undefined) {
+        console.log(error);
+        return;
+      }
       console.log(result);
       if ('players' in result) {
         this.players = result.players.online;
@@ -47,7 +53,7 @@ export class ItemComponent implements OnInit {
         this.version = result.version.name;
         const message = new this.ChatMessage(result.description);
         this.latency = result.latency;
-        this.motdparser.toHtml(message.toMotd(), (err, res) =>{
+        this.motdparser.toHtml(message.toMotd(), (err, res) => {
           this.motd = res;
           this.changeDetector.detectChanges(); //because otherwise it doesn't change on its own
         });
@@ -56,6 +62,6 @@ export class ItemComponent implements OnInit {
   }
 
   onClick(): void {
-    this.onClickServer.emit(this.server)
+    this.onClickServer.emit({server: this.server, index: this.index})
   }
 }

@@ -3,12 +3,17 @@ import {RouterModule, Routes} from '@angular/router';
 import {PageNotFoundComponent} from './shared/components';
 import {ServerListComponent} from "./server-list/server-list.component";
 import {ChatScreenComponent} from "./chat-screen/chat-screen.component";
+import {LoginScreenComponent} from "./login-screen/login-screen.component";
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'server-list',
+    redirectTo: 'login-screen',
     pathMatch: 'full'
+  },
+  {
+    path: 'login-screen',
+    component: LoginScreenComponent
   },
   {
     path: 'server-list',

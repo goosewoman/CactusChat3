@@ -1,10 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {McServer} from "../../mc.server";
 
-export interface LoginEvent {
+export interface SubmitEvent {
   server: McServer;
-  email: string;
-  password: string;
 }
 
 @Component({
@@ -14,11 +12,15 @@ export interface LoginEvent {
 })
 export class AddServerModalComponent implements OnInit {
 
-  @Output() loginEvent: EventEmitter<LoginEvent> = new EventEmitter<LoginEvent>();
+  @Output() submitEvent: EventEmitter<SubmitEvent> = new EventEmitter<SubmitEvent>();
   @Output() closeModalEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Input() server: McServer
-  @ViewChild("passwordInput") passwordInput;
-  @ViewChild("emailInput") emailInput;
+  @ViewChild("versionSelect") versionSelect;
+  @ViewChild("hostInput") hostInput;
+  @ViewChild("portInput") portInput;
+  @ViewChild("nameInput") nameInput;
+
+  server: McServer;
+  versions = ['1.9', '1.9.1', '1.9.2', '1.9.3', '1.9.4', '1.10', '1.10.1', '1.10.2', '1.11', '1.11.1', '1.11.2', '1.12', '1.12.1', '1.12.2', '1.13', '1.13.1', '1.13.2', '1.14', '1.14.1', '1.14.2', '1.14.3', '1.14.4', '1.15', '1.15.1', '1.15.2', '1.16', '1.16.1']
 
   constructor() {
   }
@@ -31,15 +33,24 @@ export class AddServerModalComponent implements OnInit {
   OnSubmit(): void {
     if (!this.hasSubmit) {
       this.hasSubmit = true;
-      const server = this.server;
-      const email = this.emailInput.nativeElement.value;
-      const password = this.passwordInput.nativeElement.value;
-      this.loginEvent.emit({server, email, password});
+      const select = this.versionSelect.nativeElement;
+
+      const server = {
+        name: this.nameInput.nativeElement.value,
+        host: this.hostInput.nativeElement.value,
+        port: this.portInput.nativeElement.value,
+        version: select.options[select.selectedIndex].value,
+      }
+      this.submitEvent.emit({server});
     }
   }
 
   OnClose(): void {
     this.closeModalEvent.emit();
 
+  }
+
+  OnDelete(): void {
+    this.submitEvent.emit({server: undefined})
   }
 }

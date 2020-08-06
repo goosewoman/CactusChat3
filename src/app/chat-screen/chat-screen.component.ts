@@ -26,6 +26,7 @@ export class ChatScreenComponent implements OnInit, AfterViewChecked, OnDestroy 
   private motdparser: any;
   private bot: any;
   players: string[] = [];
+  tabPressed = false;
 
   constructor(private botContainer: BotContainerService, private router: Router, private changeDetector: ChangeDetectorRef) {
   }
@@ -41,8 +42,26 @@ export class ChatScreenComponent implements OnInit, AfterViewChecked, OnDestroy 
   }
 
   @HostListener('window:beforeunload')
-  onBeforeUnload() {
+  onBeforeUnload(): void {
     this.disconnect();
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeydownEvent(event: KeyboardEvent): boolean {
+    if (event.key == "Tab") {
+      this.tabPressed = true;
+      return false;
+    }
+    return true;
+  }
+
+  @HostListener('document:keyup', ['$event'])
+  handleKeyupEvent(event: KeyboardEvent): boolean {
+    if (event.key == "Tab") {
+      this.tabPressed = false;
+      return false;
+    }
+    return true;
   }
 
   private disconnect() {
@@ -72,12 +91,24 @@ export class ChatScreenComponent implements OnInit, AfterViewChecked, OnDestroy 
     this.motdparser = remote.require("mcmotdparser")
     this.ChatMessage = remote.require('prismarine-chat')('1.16');
 
-    this.bot = this.mineflayer.createBot(this.botContainer.botData);
+    const botData = this.botContainer.botData;
+    const session = {
+      accessToken: undefined,
+      selectedProfile: undefined,
+      clientToken: undefined
+    };
+    session.accessToken = this.botContainer.accessToken;
+    session.clientToken = this.botContainer.clientToken;
+    session.selectedProfile = this.botContainer.selectedProfile;
+    botData.session = session;
+    console.log(botData);
+    this.bot = this.mineflayer.createBot(botData);
     this.bot.on("message", (jsonMsg) => {
       const message = new this.ChatMessage(jsonMsg);
       this.addMessage(message)
     })
     this.bot.once("login", () => {
+      this.changeDetector.detectChanges();
       this.loadPlayer();
       setInterval(() => this.loadPlayer(), 5000);
     });
@@ -91,7 +122,13 @@ export class ChatScreenComponent implements OnInit, AfterViewChecked, OnDestroy 
     console.log()
     const date = new Date();
     const timestamp = `[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}] `;
-    this.motdparser.toHtml(timestamp + message.toMotd(), (err, res: string) => {
+
+    //let the chrome engine translate htmlentities
+    const p = document.createElement("p");
+    p.textContent = message.toMotd();
+    const converted = p.innerHTML;
+
+    this.motdparser.toHtml(timestamp + converted, (err, res: string) => {
 
       this.backlog.push(res);
       this.changeDetector.detectChanges(); //because otherwise it doesn't change on its own
@@ -108,11 +145,22 @@ export class ChatScreenComponent implements OnInit, AfterViewChecked, OnDestroy 
   private loadPlayer() {
     this.players = []
     for (const player of Object.keys(this.bot.players)) {
-      if (player.includes('~')) {
+      const extra = this.bot.players[player].displayName.extra;
+      if (extra === undefined) {
         continue;
       }
-      this.players.push(player);
+      const username: string = extra[0].text;
+      const usernameRegex = /^[0-9A-Za-z_]{3,16}$/;
+      if (!usernameRegex.test(username)) {
+        continue;
+      }
+      this.players.push(username);
     }
     this.changeDetector.detectChanges()
+  }
+
+  disconnectButtonClick(): void {
+    this.disconnect();
+    this.router.navigate(["/server-list"])
   }
 }

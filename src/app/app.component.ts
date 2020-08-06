@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ElectronService } from './core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import { AppConfig } from '../environments/environment';
 export class AppComponent {
   constructor(
     private electronService: ElectronService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {
     this.translate.setDefaultLang('en');
     console.log('AppConfig', AppConfig);
@@ -24,5 +26,6 @@ export class AppComponent {
     } else {
       console.log('Run in browser');
     }
+    this.router.navigate(["/"])
   }
 }

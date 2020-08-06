@@ -1,10 +1,11 @@
+<div class="nav"><button class="btn btn-primary" (click)="disconnectButtonClick()">Disconnect</button> </div>
 <div class="textarea" #scrollMe>
   <div class="chatMessage" *ngFor="let message of this.backlog; let i = index;  trackBy: trackByMessage"><span [innerHTML]="message"></span></div>
 </div>
 <div class="chatinput">
   <input type="text" class="form-control" placeholder="Chat.." (keyup.enter)="sendChat($event)"/>
 </div>
-<div class="playerlist">
+<div *ngIf="tabPressed" class="playerlist">
   <ul >
     <li *ngFor="let player of this.players; let i = index;  trackBy: trackByMessage">{{player}}</li>
   </ul>

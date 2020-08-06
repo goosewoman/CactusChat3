@@ -1,0 +1,19 @@
+<div class="loginbody">
+  <form (keyup.enter)="OnSubmit()">
+    <div *ngIf="hasError">
+      <div class="alert alert-danger" role="alert">
+        {{errorMessage}}
+      </div>
+    </div>
+    <input type="email" [className]="hasError ? 'is-invalid form-control' : 'form-control'" class="form-control"
+           #emailInput aria-describedby="loginHelp" placeholder="Email">
+    <input type="password" [className]="hasError ? 'is-invalid form-control' : 'form-control'" class="form-control"
+           #passwordInput aria-describedby="loginHelp" placeholder="Password">
+    <small id="loginHelp" class="form-text text-muted">Login info isn't sent anywhere but Mojang's servers</small>
+    <div class="form-check">
+<!--      <input type="checkbox" #checkbox class="form-check-input" id="checkbox">-->
+<!--      <label class="form-check-label" for="checkbox">Remember login?</label>-->
+    </div>
+    <button type="button" class="btn btn-primary" id (click)="OnSubmit()">Log In</button>
+  </form>
+</div>

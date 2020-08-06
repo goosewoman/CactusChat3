@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen } from 'electron';
+import {app, BrowserWindow, screen} from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -15,11 +15,12 @@ function createWindow(): BrowserWindow {
   win = new BrowserWindow({
     x: 0,
     y: 0,
-    width: size.width,
-    height: size.height,
+    width: 800,
+    height: 600,
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
+      preload: path.join(__dirname, 'preload.js'),
     },
   });
 
@@ -82,3 +83,5 @@ try {
   // Catch Error
   // throw e;
 }
+
+
