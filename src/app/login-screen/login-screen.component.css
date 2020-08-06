@@ -1,9 +1,9 @@
 .loginbody {
   width: 500px;
-  height: 300px;
+  height: 150px;
   position: absolute;
   left: 50%;
   margin-left: -250px;
   top: 50%;
-  margin-top: -150px;
+  margin-top: -75px;
 }
