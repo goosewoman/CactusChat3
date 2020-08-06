@@ -11,7 +11,7 @@ jobs:
       - store_artifacts:
           path: /root/project/build
   build_mac:
-  macos:
+    macos:
       xcode: "10.0.0"
     steps:
       - checkout
