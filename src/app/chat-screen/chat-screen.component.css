@@ -43,7 +43,7 @@
   font-size: 12px;
   width: 600px;
   background: rgba(25, 25, 25, 0.8);
-  height: 600px;
+  /*height: 600px;*/
   overflow: hidden;
   position: fixed;
   left: 50%;
@@ -54,4 +54,12 @@
   -webkit-columns: 3;
   -moz-columns: 3;
   list-style: none;
+}
+.kickMessage {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  width: 400px;
+  margin-left: -200px;
+  font-size: 25px;
 }

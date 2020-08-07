@@ -36,6 +36,7 @@ export class ChatScreenComponent implements OnInit, AfterViewChecked, OnDestroy 
   };
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   private disconnecting = false;
+  kickedMessage = "";
 
   ngAfterViewChecked(): void {
     this.scrollToBottom();
@@ -82,13 +83,13 @@ export class ChatScreenComponent implements OnInit, AfterViewChecked, OnDestroy 
   ngOnInit(): void {
     this.scrollToBottom();
     if (this.botContainer.botData === undefined) {
-      this.router.navigate(["/"])
+      this.router.navigate(["/"]);
       return;
     }
     this.mineflayer = remote.require("mineflayer");
     this.ChatMessage = this.mineflayer.ChatMessage;
 
-    this.motdparser = remote.require("mcmotdparser")
+    this.motdparser = require("mcmotdparser");
     this.ChatMessage = remote.require('prismarine-chat')('1.16');
 
     const botData = this.botContainer.botData;
@@ -101,16 +102,22 @@ export class ChatScreenComponent implements OnInit, AfterViewChecked, OnDestroy 
     session.clientToken = this.botContainer.clientToken;
     session.selectedProfile = this.botContainer.selectedProfile;
     botData.session = session;
-    console.log(botData);
     this.bot = this.mineflayer.createBot(botData);
     this.bot.on("message", (jsonMsg) => {
       const message = new this.ChatMessage(jsonMsg);
       this.addMessage(message)
-    })
+    });
     this.bot.once("login", () => {
       this.changeDetector.detectChanges();
       this.loadPlayer();
       setInterval(() => this.loadPlayer(), 5000);
+    });
+    this.bot.once("kicked", (reason: string, loggedIn: boolean) => {
+      console.log(`kicked: ${reason}`);
+      this.motdparser.toHtml(new this.ChatMessage(JSON.parse(reason)).toMotd(), (err, res: string) => {
+        this.kickedMessage = res;
+        this.changeDetector.detectChanges();
+      });
     });
   }
 
@@ -119,7 +126,6 @@ export class ChatScreenComponent implements OnInit, AfterViewChecked, OnDestroy 
   }
 
   private addMessage(message: ChatMessage) {
-    console.log()
     const date = new Date();
     const timestamp = `[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}] `;
 

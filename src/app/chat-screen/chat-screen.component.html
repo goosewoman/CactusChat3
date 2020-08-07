@@ -7,7 +7,8 @@
 </div>
 <div *ngIf="tabPressed" class="playerlist">
   <ul >
-    <li *ngFor="let player of this.players; let i = index;  trackBy: trackByMessage">{{player}}</li>
+    <li *ngFor="let player of this.players; let i = index;  trackBy: trackByMessage" [innerHTML]="player"></li>
   </ul>
 </div>
 
+<div *ngIf="kickedMessage" class="kickMessage alert alert-secondary" role="alert" [innerHTML]="'Disconnected: ' + kickedMessage"></div>
