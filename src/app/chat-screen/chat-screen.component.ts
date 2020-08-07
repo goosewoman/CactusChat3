@@ -143,20 +143,48 @@ export class ChatScreenComponent implements OnInit, AfterViewChecked, OnDestroy 
   }
 
   private loadPlayer() {
-    this.players = []
-    for (const player of Object.keys(this.bot.players)) {
-      const extra = this.bot.players[player].displayName.extra;
-      if (extra === undefined) {
+    this.players = [];
+    const botPlayers = this.bot.players;
+    const botPlayerKeys = Object.keys(botPlayers);
+    let preSortedUsers: { username: string, message: ChatMessage }[] = [];
+    for (const player of botPlayerKeys) {
+      if (botPlayers[player] === undefined) {
         continue;
       }
-      const username: string = extra[0].text;
+      const displayName = botPlayers[player].displayName;
+      if (displayName.extra === undefined) {
+        continue;
+      }
+      const username: string = displayName.extra[0].text;
       const usernameRegex = /^[0-9A-Za-z_]{3,16}$/;
       if (!usernameRegex.test(username)) {
         continue;
       }
-      this.players.push(username);
+      const message = new this.ChatMessage(displayName);
+      preSortedUsers.push({username, message})
     }
-    this.changeDetector.detectChanges()
+
+    preSortedUsers = preSortedUsers.sort((a, b) => {
+      if (a.username.toLowerCase() > b.username.toLowerCase()) {
+        return 1;
+      } else if (b.username.toLowerCase() > a.username.toLowerCase()) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    const usernames: string[] = [];
+    for (const user of preSortedUsers) {
+
+      if (usernames.includes(user.username)) {
+        continue;
+      }
+      usernames.push(user.username);
+      this.motdparser.toHtml(user.message.toMotd(), (err, res: string) => {
+        this.players.push(res);
+        this.changeDetector.detectChanges()
+      });
+    }
   }
 
   disconnectButtonClick(): void {
