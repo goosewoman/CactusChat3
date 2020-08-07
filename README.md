@@ -1,6 +1,6 @@
 # Minecraft Java Edition Chat Client
 
-I didn't sign any code cuz I'm a web developer and don't have any certificates lying around.
+I didn't sign any code cuz I'm a web developer and don't have any certificates lying around. (that shit expensive yo)
 
 ## How to run: 
 ### Linux: 
