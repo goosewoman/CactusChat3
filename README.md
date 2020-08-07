@@ -2,6 +2,8 @@
 
 I didn't sign any code cuz I'm a web developer and don't have any certificates lying around. (that shit expensive yo)
 
+You can change zoom levels in the menubar at the top
+
 ## How to run: 
 ### Linux: 
 - Make AppImage executable.
@@ -13,3 +15,5 @@ I didn't sign any code cuz I'm a web developer and don't have any certificates l
 - Double Click the EXE.
 - Ignore the warnings
 - It's now in your start menu as an installed program.
+
+![screenshot of chat](http://i.rdthrne.com/dfe5855b8d.png)
