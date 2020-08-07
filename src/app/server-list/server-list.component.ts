@@ -103,7 +103,7 @@ export class ServerListComponent implements OnInit {
   }
 
   onClickLogoutButton(): void {
-    this.store.delete("clientToken");
+    // this.store.delete("clientToken");
     this.store.delete("accessToken");
     this.store.delete("username");
     this.store.delete("userID");
